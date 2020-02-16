@@ -40,7 +40,7 @@
     flex: 0;
     font-family: $font-family;
     border-style: none;
-    font-size: 2rem;
+    font-size: 2.5rem;
     position: relative;
     width: 100%;
     z-index: 2;
@@ -54,6 +54,10 @@
     &.valid {
       opacity: 0.5;
     }
+    &:disabled {
+      font-size: 1.5rem;
+    }
+
   }
 
   > div {
@@ -104,6 +108,21 @@
 
 .fileContainer .btn {
   border: 2px solid rgba(black, 0.8);
+  color: white;
+  background-color: rgba(0,0,0, 0.3);
+  padding: 8px 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.fileContainer .btn:disabled {
+  font-size: 1.5rem;
+}
+
+.fileContainer .btn:hover {
+  border: 10px solid rgba(black, 0.8);
   color: white;
   background-color: rgba(0,0,0, 0.3);
   padding: 8px 20px;
