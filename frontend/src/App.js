@@ -57,7 +57,7 @@ class Enter extends Component {
 
       axios({
         url: `${API_BASE}/youtube?v=${this.state.youtubePath}`,
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'none'
         }
