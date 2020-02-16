@@ -29,9 +29,8 @@ def match_id(filename):
     for file in json_file:
         seen = json.loads(file)
     for line in seen:
-        if
-    filename == line['imageName']:
-    print(line)
+        if filename == line['imageName']:
+            print(line)
     return line['productId']
     break
 
