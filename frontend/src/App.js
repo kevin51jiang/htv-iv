@@ -4,7 +4,8 @@ import SiriWave from 'siriwave';
 import axios from 'axios';
 // import Dropzone from 'react-dropzone';
 
-const API_BASE = "http://localhost:3000/";
+const API_BASE = "http://34.67.200.241:5000";
+//http://34.67.200.241:5000/youtube?v=
 
 class Enter extends Component {
   state = {
@@ -15,8 +16,6 @@ class Enter extends Component {
     done: false
   };
 
-
-
   onFileChange = (e) => {
     // eslint-disable-next-line
     if (e.target.value.split('.').pop().toUpperCase() == "MP4") {
@@ -25,6 +24,11 @@ class Enter extends Component {
         videoPath: matches,
         valid: e.target.value !== null,
       });
+
+      if(e.target.value !== null) {
+        this.submitFile('multipart/form-data');
+      }
+
     } else {
       e.target.value = '';
       alert("Please upload a valid .mp4");
@@ -38,11 +42,26 @@ class Enter extends Component {
       youtubePath: matches !== null ? matches[1] : e.target.value,
       youtubePathValid: matches !== null,
     });
+
+    if(matches !== null) {
+      this.submitYoutube();
+    }
   };
 
 
-  submit = (contentType) => {
+  submitYoutube = () => {
 
+    console.log("submit youtube");
+    this.setState({ done: true }, () => {
+      setTimeout(() => {
+        this.props.onEnter(this.state.youtubePath);
+      }, 1000);
+    });
+  }
+
+
+  submitFile = (contentType) => {
+    console.log("submit file");
     const data = new FormData();
     data.append("file", this.state.videoPath);
 
@@ -57,12 +76,7 @@ class Enter extends Component {
       console.error("ERROR: " + err);
     })
 
-
-    this.setState({ done: true }, () => {
-      setTimeout(() => {
-        this.props.onEnter(this.state.youtubePath);
-      }, 1000);
-    });
+   
   }
 
 
@@ -74,16 +88,13 @@ class Enter extends Component {
   render() {
     return (
       <div className={"enter" + (this.state.done ? ' done' : '')} id="enter-area">
-        <div class="fileContainer">
-          <button class="btn" disabled={this.state.valid}>upload a video file</button>
+        <div className="fileContainer">
+          <button className="btn" disabled={this.state.valid}>upload a video file</button>
           <input className={"custom-file-input " + (this.state.valid ? 'valid' : '')} disabled={this.state.valid} type='file' placeholder="Choose a video to analyze!" onChange={this.onFileChange}></input>
         </div>
 
         <input className={(this.state.valid && this.state.youtubePathValid) ? 'valid' : ''} disabled={!this.state.valid} type="text" placeholder="Enter Youtube URL" value={this.state.youtubePath} onChange={this.onYoutubeChange}></input>
 
-        <div className={this.state.youtubePathValid ? 'valid' : ''}>
-          <button disabled={!this.state.youtubePathValid} onClick={() => this.submit('multipart/form-data')}>Submit</button>
-        </div>
       </div>
     );
   }
@@ -92,17 +103,16 @@ class Enter extends Component {
 class Video extends Component {
   state = {
     ready: false
-  };
-
+  }
 
   videoRef = React.createRef();
+
   componentDidMount() {
     this.videoRef.current.addEventListener('canplay', () => {
       this.setState({ ready: true });
       this.props.onReady();
     });
   }
-
 
   render() {
     return (
@@ -112,13 +122,11 @@ class Video extends Component {
           <p>Analyzing... (this may take a while)</p>
         </div>}
         <video controls ref={this.videoRef}>
-          <source src={"http://visualyze.tech/download?id=" + this.props.video + "&lang=" + this.props.lang} type="video/mp4" />
+          {/* <source src={`${API_BASE}compare/?ref=${youtubePath}&compare=${id2}`} type="video/mp4" /> */}
         </video>
       </div>
     )
   }
-
-
 }
 
 class App extends Component {
