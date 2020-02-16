@@ -5,7 +5,7 @@ import axios from 'axios';
 // import Dropzone from 'react-dropzone';
 
 const API_BASE = "http://34.67.200.241:5000";
-//http://34.67.200.241:5000/youtube?v=
+//http://34.67.200.241:5000/upload
 
 class Enter extends Component {
   state = {
@@ -25,7 +25,7 @@ class Enter extends Component {
         valid: e.target.value !== null,
       });
 
-      if(e.target.value !== null) {
+      if (e.target.value !== null) {
         this.submitFile('multipart/form-data');
       }
 
@@ -43,7 +43,7 @@ class Enter extends Component {
       youtubePathValid: matches !== null,
     });
 
-    if(matches !== null) {
+    if (matches !== null) {
       this.submitYoutube();
     }
   };
@@ -51,8 +51,19 @@ class Enter extends Component {
 
   submitYoutube = () => {
 
-    console.log("submit youtube");
+    console.log("submit youtube1");
     this.setState({ done: true }, () => {
+
+
+      axios({
+        url: `${API_BASE}/youtube?v=${this.state.youtubePath}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'none'
+        }
+      }).catch((err) => {
+        console.error("ERROR: " + err);
+      })
       setTimeout(() => {
         this.props.onEnter(this.state.youtubePath);
       }, 1000);
@@ -76,7 +87,7 @@ class Enter extends Component {
       console.error("ERROR: " + err);
     })
 
-   
+
   }
 
 
