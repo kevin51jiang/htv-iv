@@ -1,3 +1,5 @@
+frontend/node_modules
+
 ######################### Binary Files #########################
 # Compiled Object files
 *.slo
@@ -116,9 +118,9 @@ distribute/
 ######################### Compilation (build, distribute & bins) Files / Folders #########################
 *.bin
 *.testbin
-build
-build*
-.build*
+openpose/*build
+openpose/*build*
+openpose/*.build*
 *cmake_build
 distribute/*
 python/caffe/proto/
