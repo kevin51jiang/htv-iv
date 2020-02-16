@@ -13,7 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to bottom right, saturate(lighten($base, 10%), 10%) 0%, $base 100%);
+  background: linear-gradient(to bottom right, #0c7b93, #142850 );
   min-height: 100%;
   display: flex;
 }
