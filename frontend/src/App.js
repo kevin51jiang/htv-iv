@@ -84,6 +84,7 @@ class Enter extends Component {
         <div className={this.state.youtubePathValid ? 'valid' : ''}>
           <button disabled={!this.state.youtubePathValid} onClick={() => this.submit('multipart/form-data')}>Submit</button>
         </div>
+
       </div>
     );
   }
@@ -92,17 +93,16 @@ class Enter extends Component {
 class Video extends Component {
   state = {
     ready: false
-  };
-
+  }
 
   videoRef = React.createRef();
+
   componentDidMount() {
     this.videoRef.current.addEventListener('canplay', () => {
       this.setState({ ready: true });
       this.props.onReady();
     });
   }
-
 
   render() {
     return (
@@ -111,9 +111,9 @@ class Video extends Component {
           <div className="spinner"></div>
           <p>Analyzing... (this may take a while)</p>
         </div>}
-        <video controls ref={this.videoRef}>
-          <source src={"http://visualyze.tech/download?id=" + this.props.video + "&lang=" + this.props.lang} type="video/mp4" />
-        </video>
+        {/* <video controls ref={this.videoRef}>
+          <source src={`${API_BASE}compare/?ref=${youtubePath}&compare=${id2}`} type="video/mp4" />
+        </video> */}
       </div>
     )
   }
