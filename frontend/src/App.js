@@ -63,7 +63,7 @@ class Enter extends Component {
     return (
       <div className={"enter" + (this.state.done ? ' done' : '')} id="enter-area">
         <div class="fileContainer">
-          <h1>upload a video file</h1>
+          <h1 class="btn">upload a video file</h1>
           <input className={"custom-file-input " + (this.state.valid ? 'valid' : '')} type='file' placeholder="Choose a video to analyze!" onChange={this.onFileChange}></input>
         </div>
 
