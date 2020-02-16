@@ -97,22 +97,27 @@
 
 // CUSTOM FILE INPUT
 .fileContainer {
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
+  display: inline-block;
 }
 
-.fileContainer [type=file] {
-  cursor: inherit;
-  display: block;
-  font-size: 999px;
-  filter: alpha(opacity=0);
-  min-height: 100%;
-  min-width: 100%;
-  opacity: 0;
+.fileContainer .btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.fileContainer input[type=file] {
+  font-size: 100px;
   position: absolute;
-  right: 0;
-  text-align: right;
+  left: 0;
   top: 0;
+  opacity: 0;
 }
 // OTHER
 
